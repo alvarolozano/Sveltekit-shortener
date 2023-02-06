@@ -42,7 +42,7 @@
 			
 		{#if form && form.url}
 			<div class="flex lg:flex-row flex-col items-center gap-2">
-				<p class="w-full h-full lg:text-start text-center" id="result">{form.url}</p>
+				<p class="w-full h-full lg:text-start text-center break-words" id="result">{form.url}</p>
 				<div class="flex gap-2">
 
 				

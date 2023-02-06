@@ -41,26 +41,30 @@
 		{/if}
 			
 		{#if form && form.url}
-			<div class="flex items-center gap-2">
-				<p class="w-full h-full" id="result">{form.url}</p>
-				<button class={`${visited ? 'text-black border-sky-900' : 'bg-neutral-800 text-white border-transparent'} border-2 h-full p-2 rounded-full transition-all duration-1000`} type="button" on:click={copy}>
-					<div class="h-6 w-6 p-0.5">
-						{#if !visited}
-							<CopyIcon />
-						{/if}
-						{#if visited}
-							<CheckIcon />
-						{/if}
-					</div>
-				</button>
+			<div class="flex lg:flex-row flex-col items-center gap-2">
+				<p class="w-full h-full lg:text-start text-center" id="result">{form.url}</p>
+				<div class="flex gap-2">
 
-				{#if data.shareAPI}
-					<button class={`bg-neutral-700 text-white h-full border-2 border-transparent p-2 rounded-full transition-all duration-1000`} type="button" on:click={share}>
-						<div class="h-6 w-6">
-							<ShareIcon />
+				
+					<button class={`${visited ? 'text-black border-sky-900' : 'bg-neutral-800 text-white border-transparent'} border-2 h-full p-2 rounded-full transition-all duration-1000`} type="button" on:click={copy}>
+						<div class="h-6 w-6 p-0.5">
+							{#if !visited}
+								<CopyIcon />
+							{/if}
+							{#if visited}
+								<CheckIcon />
+							{/if}
 						</div>
 					</button>
-				{/if}
+
+					{#if data.shareAPI}
+						<button class={`bg-neutral-700 text-white h-full border-2 border-transparent p-2 rounded-full transition-all duration-1000`} type="button" on:click={share}>
+							<div class="h-6 w-6">
+								<ShareIcon />
+							</div>
+						</button>
+					{/if}
+				</div>
 			</div>
 		{/if}
 	</form>

@@ -1,38 +1,16 @@
-# create-svelte
+# Sveltekit-shortener (powered by PocketBase)
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+I have been using Next.js for almost 1 year. It is my favourite framework, but SvelteKit seems to be a great alternative (also has unique functionalities). This is a personal project with this goals:
+- [ ] Go deeper with Svelte/SvelteKit
+- [ ] Build an useful tool for my personal use
+- [ ] Develop my first PocketBase backend (I normally build from scratch or use other CMS such as Strapi)
 
-## Creating a project
+## Test it now
+https://router.alvarolozano.dev
 
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+## Local development
+1. Clone the repo
+2. Make an npm/pnpm/yarn install
+3. Get the latest PocketBase binary release
+4. Follow the instructions and import the database structure from the `db.json` file
+5. Create a .env file and set the `PB_URL` variable to PocketBase's root url

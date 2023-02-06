@@ -8,12 +8,14 @@ specifiers:
   '@sveltejs/kit': ^1.5.0
   '@types/cookie': ^0.5.1
   autoprefixer: ^10.4.13
+  install: ^0.13.0
   pocketbase: ^0.10.1
   postcss: ^8.4.21
   prettier: ^2.8.3
   prettier-plugin-svelte: ^2.9.0
   svelte: ^3.55.1
   svelte-check: ^3.0.3
+  svelte-icons: ^2.1.0
   tailwindcss: ^3.2.4
   tslib: ^2.5.0
   typescript: ^4.9.5
@@ -21,7 +23,9 @@ specifiers:
 
 dependencies:
   '@sveltejs/adapter-vercel': 2.0.1_@sveltejs+kit@1.5.0
+  install: 0.13.0
   pocketbase: 0.10.1
+  svelte-icons: 2.1.0
 
 devDependencies:
   '@fontsource/fira-mono': 4.5.10
@@ -837,6 +841,11 @@ packages:
   /inherits/2.0.4:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
 
+  /install/0.13.0:
+    resolution: {integrity: sha512-zDml/jzr2PKU9I8J/xyZBQn8rPCAY//UOYNmR01XwNwyfhEWObo2SWfSl1+0tm1u6PhxLwDnfsT/6jB7OUxqFA==}
+    engines: {node: '>= 0.10'}
+    dev: false
+
   /is-binary-path/2.1.0:
     resolution: {integrity: sha512-ZMERYes6pDydyuGidse7OsHxtbI7WVeUEozgR/g7rd0xUimYNlvZRE/K2MgZTjWy725IfelLeVcEM97mmtRGXw==}
     engines: {node: '>=8'}
@@ -1374,6 +1383,10 @@ packages:
       svelte: '>=3.19.0'
     dependencies:
       svelte: 3.55.1
+
+  /svelte-icons/2.1.0:
+    resolution: {integrity: sha512-rHPQjweEc9fGSnvM0/4gA3pDHwyZyYsC5KhttCZRhSMJfLttJST5Uq0B16Czhw+HQ+HbSOk8kLigMlPs7gZtfg==}
+    dev: false
 
   /svelte-preprocess/5.0.1_k4bhxdknaltjvjwprbm23edr5q:
     resolution: {integrity: sha512-0HXyhCoc9rsW4zGOgtInylC6qj259E1hpFnJMJWTf+aIfeqh4O/QHT31KT2hvPEqQfdjmqBR/kO2JDkkciBLrQ==}

@@ -7,7 +7,9 @@ export function load({ params }: any) {
 
     try {
         return {
-            shareAPI: window.navigator.canShare()
+            shareAPI: window.navigator.canShare({
+                url: 'https://example.com'
+            })
         }
     } catch {
         return {

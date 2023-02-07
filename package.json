@@ -31,6 +31,7 @@
 	"dependencies": {
 		"@sveltejs/adapter-vercel": "^2.0.1",
 		"install": "^0.13.0",
+		"metatag-crawler": "^2.1.0",
 		"pocketbase": "^0.10.1",
 		"svelte-icons": "^2.1.0"
 	}

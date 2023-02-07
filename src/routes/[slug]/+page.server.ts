@@ -2,12 +2,18 @@ import links from "../../lib/pb";
 import { redirect } from '@sveltejs/kit';
 
 /** @type {import('./$types').PageServerLoad} */
-export async function load({ params }: any) {
+export async function load({ params, request }: any) {
     
     if(params.slug) {
-
         try {     
             const link = await links.getOne(params.slug);
+            if(request.headers.get('user-agent').includes('Bot') && link) {            
+                return {
+                    error: false,
+                    meta: link.meta
+                }    
+            }
+
             throw redirect(302, link.url);
         } catch (error: any) {
             if(error?.status == 302)

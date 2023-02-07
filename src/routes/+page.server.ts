@@ -15,22 +15,24 @@ export const actions = {
         .create({
           url
         });
+      await new Promise(async (resolve: any, reject: any) => {
+        openGraph(url, async (err: any, data: any) => {
 
-      openGraph(url, (err: any, data: any) => {
+          var oldStyleData = {
+            title: data.og.title || data.meta.title,
+            description: data.og.descriptions || data.meta.description,
+            images: data.og.images,
+            videos: data.og.videos
+          };
 
-        var oldStyleData = {
-          title: data.og.title || data.meta.title,
-          description: data.og.descriptions || data.meta.description,
-          images: data.og.images,
-          videos: data.og.videos
-        };
-
-        if(!err)
-          pb.update(record.id, {
-            url,
-            meta: oldStyleData
-          });
-      });
+          if(!err)
+            await pb.update(record.id, {
+              url,
+              meta: oldStyleData
+            });
+          resolve();
+        });
+    });
 
       return {
         url: `${request.headers.get('origin')}/${record.id}`

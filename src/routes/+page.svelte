@@ -1,12 +1,11 @@
 <script lang="ts">
-	import welcome from '$lib/images/svelte-welcome.webp';
-	import welcome_fallback from '$lib/images/svelte-welcome.png';
-	import CopyIcon from 'svelte-icons/fa/FaCopy.svelte';
 	import CheckIcon from 'svelte-icons/fa/FaCheck.svelte';
+	import CopyIcon from 'svelte-icons/fa/FaCopy.svelte';
 	import ShareIcon from 'svelte-icons/fa/FaShareAlt.svelte';
 
 	export let form: {url: String} | undefined;
 	let visited=false;
+	let valid=false;
 	export let data: any;
 
 
@@ -30,14 +29,29 @@
 			});
 	}
 
+	function validate(e: any) {
+		valid = e.target.validity.valid;
+	}
+
+	function troll() {
+		const classes = document.getElementById('troll-grid')?.classList;
+		if(!valid && classes) {
+			classes.contains('w-max') ? 
+					classes.replace('w-max', 'w-full') :
+					classes.replace('w-full', 'w-max');
+		}
+	}
+
 </script>
 
 
-	<form method="post" class={`bg-neutral-200 rounded-md w-full h-max col-start-3 col-span-1 p-4 flex flex-col gap-5`}>
+	<form method="post" class={`bg-neutral-200 rounded-md w-full h-max col-start-3 col-span-1 p-4 flex flex-col gap-5 transition-all`}>
 		{#if !form || !form.url}
 			<h1 class="text-2xl text-center">Short an URL</h1>
-			<input type="url" name="url" class="w-full ring-0 bg-neutral-400 rounded-md h-11 px-2 text-black placeholder:text-gray-700" placeholder="enter an URL"/>
-			<button formaction="/" class="w-full bg-black text-white py-2 rounded-full">Send</button>
+			<input type="url" required name="url" class="w-full ring-0 bg-neutral-400 rounded-md h-11 px-2 text-black placeholder:text-gray-700" placeholder="enter an URL" on:keydown={validate} on:input={validate}/>
+			<div id="troll-grid" class="flex transition-all w-full justify-end">
+				<button formaction="/" class={`${valid ? 'bg-black' : 'bg-red-600'} w-max px-12 text-white py-2 rounded-full transition-all`} on:mousemove={troll}>Send</button>
+			</div>
 		{/if}
 			
 		{#if form && form.url}

@@ -43,9 +43,6 @@
 	}
 
 	function troll(e: any) {
-		const btnClasses = document.getElementById('troll-btn')?.classList;
-		const gridClasses = document.getElementById('troll-grid')?.classList;
-
 		if(!valid && btn && grid) {
 			grid.classList.contains('w-full') ? 
 				grid.classList.replace('w-full', 'w-0') :
@@ -60,6 +57,7 @@
 
 
 	<form method="post" class={`bg-neutral-200 rounded-md w-full h-max col-start-3 col-span-1 p-4 flex flex-col gap-5 transition-all`}>
+		<div class="hidden w-full w-0 translate-x-full"></div>
 		{#if !form || !form.url}
 			<h1 class="text-2xl text-center">Short an URL</h1>
 			<input type="url" required name="url" class="w-full ring-0 bg-neutral-400 rounded-md h-11 px-2 text-black placeholder:text-gray-700" placeholder="enter an URL" on:keydown={validate} on:input={validate}/>

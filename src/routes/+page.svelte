@@ -8,6 +8,9 @@
 	let valid=false;
 	export let data: any;
 
+	let btn: HTMLElement;
+	let grid: HTMLElement;
+
 
 	function copy() {
 		navigator.clipboard.writeText(`${form?.url}`).then(() => {
@@ -31,14 +34,25 @@
 
 	function validate(e: any) {
 		valid = e.target.validity.valid;
+		if(valid) {
+			btn.classList.remove('translate-x-full');
+			grid.classList?.remove('w-0');
+			grid.classList?.add('w-full');
+
+		}
 	}
 
-	function troll(e) {
-		const classes = document.getElementById('troll-grid')?.classList;
-		if(!valid && classes) {
-			classes.contains('translate-x-0') ? 
-					classes.replace('translate-x-0', 'translate-x-full') :
-					classes.replace('translate-x-full', 'translate-x-0');
+	function troll(e: any) {
+		const btnClasses = document.getElementById('troll-btn')?.classList;
+		const gridClasses = document.getElementById('troll-grid')?.classList;
+
+		if(!valid && btn && grid) {
+			grid.classList.contains('w-full') ? 
+				grid.classList.replace('w-full', 'w-0') :
+				grid.classList.replace('w-0', 'w-full');
+			
+		
+			btn.classList?.toggle('translate-x-full');
 		}
 	}
 
@@ -49,8 +63,8 @@
 		{#if !form || !form.url}
 			<h1 class="text-2xl text-center">Short an URL</h1>
 			<input type="url" required name="url" class="w-full ring-0 bg-neutral-400 rounded-md h-11 px-2 text-black placeholder:text-gray-700" placeholder="enter an URL" on:keydown={validate} on:input={validate}/>
-			<div class="flex w-full flex-row transition-all">
-				<button id="troll-grid" formaction="/" class={`translate-x-0 ${valid ? 'bg-black' : 'bg-red-600'} w-max px-12 text-white py-2 rounded-full transition-all`} on:mouseenter={troll}>Send</button>
+			<div bind:this={grid} class="flex w-full flex-row transition-all justify-end">
+				<button bind:this={btn} class:bg-red-600={!valid} class:bg-black={valid} formaction="/" class={`translate-x-0  w-max px-12 text-white py-2 rounded-full transition-all`} on:mouseenter={troll}>Send</button>
 			</div>
 		{/if}
 			

@@ -18,11 +18,13 @@ export const actions = {
       await new Promise(async (resolve: any, reject: any) => {
         openGraph(url, async (err: any, data: any) => {
 
+          if(!data) resolve();
+
           var oldStyleData = {
-            title: data.og.title || data.meta.title,
-            description: data.og.descriptions || data.meta.description,
-            images: data.og.images,
-            videos: data.og.videos
+            title: data?.og?.title || data?.meta?.title,
+            description: data?.og?.descriptions || data?.meta?.description,
+            images: data?.og?.images,
+            videos: data?.og?.videos
           };
 
           if(!err)

@@ -33,12 +33,12 @@
 		valid = e.target.validity.valid;
 	}
 
-	function troll() {
+	function troll(e) {
 		const classes = document.getElementById('troll-grid')?.classList;
 		if(!valid && classes) {
-			classes.contains('w-max') ? 
-					classes.replace('w-max', 'w-full') :
-					classes.replace('w-full', 'w-max');
+			classes.contains('translate-x-0') ? 
+					classes.replace('translate-x-0', 'translate-x-full') :
+					classes.replace('translate-x-full', 'translate-x-0');
 		}
 	}
 
@@ -49,8 +49,8 @@
 		{#if !form || !form.url}
 			<h1 class="text-2xl text-center">Short an URL</h1>
 			<input type="url" required name="url" class="w-full ring-0 bg-neutral-400 rounded-md h-11 px-2 text-black placeholder:text-gray-700" placeholder="enter an URL" on:keydown={validate} on:input={validate}/>
-			<div id="troll-grid" class="flex transition-all w-full justify-end">
-				<button formaction="/" class={`${valid ? 'bg-black' : 'bg-red-600'} w-max px-12 text-white py-2 rounded-full transition-all`} on:mousemove={troll}>Send</button>
+			<div class="flex w-full flex-row transition-all">
+				<button id="troll-grid" formaction="/" class={`translate-x-0 ${valid ? 'bg-black' : 'bg-red-600'} w-max px-12 text-white py-2 rounded-full transition-all`} on:mouseenter={troll}>Send</button>
 			</div>
 		{/if}
 			

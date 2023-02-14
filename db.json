@@ -72,12 +72,33 @@
           "exceptDomains": null,
           "onlyDomains": null
         }
+      },
+      {
+        "id": "3elxtxbw",
+        "name": "meta",
+        "type": "json",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {}
+      },
+      {
+        "id": "t5tye8fm",
+        "name": "expiration",
+        "type": "date",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {
+          "min": "",
+          "max": ""
+        }
       }
     ],
     "listRule": null,
-    "viewRule": "",
+    "viewRule": "@now <= expiration || expiration = \"\"",
     "createRule": "",
-    "updateRule": null,
+    "updateRule": "",
     "deleteRule": null,
     "options": {}
   }

@@ -2,6 +2,10 @@
 	import CheckIcon from 'svelte-icons/fa/FaCheck.svelte';
 	import CopyIcon from 'svelte-icons/fa/FaCopy.svelte';
 	import ShareIcon from 'svelte-icons/fa/FaShareAlt.svelte';
+	import CalendarIcon from 'svelte-icons/fa/FaCalendar.svelte';
+	import CrossIcon from 'svelte-icons/fa/FaTimes.svelte';
+
+	import { fly } from "svelte/transition";
 
 	export let form: {url: String} | undefined;
 	let visited=false;
@@ -10,6 +14,9 @@
 
 	let btn: HTMLElement;
 	let grid: HTMLElement;
+	let date: HTMLElement;
+
+	let dateEnabled: boolean = false;
 
 
 	function copy() {
@@ -60,6 +67,27 @@
 		{#if !form || !form.url}
 			<h1 class="text-2xl text-center dark:text-white">Short an URL</h1>
 			<input type="url" required name="url" class="w-full ring-0 bg-neutral-400 dark:bg-neutral-700  rounded-md h-11 px-2 text-black dark:text-neutral-50 placeholder:text-gray-700 dark:placeholder:text-neutral-400" placeholder="enter an URL" on:keydown={validate} on:input={validate}/>
+			<button type="button" class="text-red-500 w-max flex gap-2 items-center" on:click={() => dateEnabled = !dateEnabled}>
+				<div class="h-4 w-4">
+					{#if !dateEnabled}
+						<CalendarIcon />
+					{/if}
+					{#if dateEnabled}
+						<CrossIcon />
+					{/if}
+				</div>
+				{
+					dateEnabled ?
+					'Remove expiration' :
+					'Set expiration'
+				}
+				
+			</button>
+			{#if dateEnabled}
+				<input in:fly={{ y: -30 }} out:fly={{ y: -30 }} name="expiration" placeholder="Expiration" bind:this={date} type="datetime-local" class="w-max p-2 bg-neutral-400 dark:bg-neutral-700 dark:text-neutral-50 placeholder:text-gray-700 dark:placeholder:text-neutral-400 rounded-md" min={new Date().toDateString()} />
+			{/if}
+			
+			
 			<div bind:this={grid} class="flex w-full flex-row transition-all justify-end duration-1000">
 				<button bind:this={btn} type={valid ? 'submit' : 'button'} class:bg-red-600={!valid} class:dark:bg-sky-700={valid} class:bg-black={valid} formaction="/" class={`w-max px-12 text-white py-2 rounded-full transition-all duration-1000`} on:mouseenter={troll}>Send</button>
 			</div>

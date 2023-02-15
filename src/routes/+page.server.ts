@@ -9,11 +9,18 @@ export const actions = {
     const data = await request.formData();
 
     const url = data.get('url');
+    const expiration = data.get('expiration');
+
+    let expDate: any;
+   
+    if(expiration) expDate = new Date(expiration.toString());
+
     if(url) {
       
       const record = await pb
         .create({
-          url
+          url,
+          expiration: expDate
         });
       await new Promise(async (resolve: any, reject: any) => {
         openGraph(url, async (err: any, data: any) => {
@@ -30,6 +37,7 @@ export const actions = {
           if(!err)
             await pb.update(record.id, {
               url,
+              expiration: expDate,
               meta: oldStyleData
             });
           resolve();

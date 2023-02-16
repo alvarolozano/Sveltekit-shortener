@@ -7,7 +7,7 @@ export async function load({ params, request }: any) {
     if(params.slug) {
         try {     
             const link = await links.getOne(params.slug);
-            if(request.headers.get('user-agent').includes('Bot') && link) {            
+            if((request.headers.get('user-agent').includes('Bot') || request.headers.get('user-agent').includes('WhatsApp')) && link) {            
                 return {
                     error: false,
                     meta: link.meta

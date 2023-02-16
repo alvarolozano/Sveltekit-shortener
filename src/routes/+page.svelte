@@ -18,7 +18,6 @@
 
 	let dateEnabled: boolean = false;
 
-
 	function copy() {
 		navigator.clipboard.writeText(`${form?.url}`).then(() => {
 			visited = true;
@@ -59,30 +58,37 @@
 			btn.classList?.toggle('translate-x-full');
 		}
 	}
-
+	
 </script>
 
 
 	<form method="post" class={`bg-neutral-200 rounded-md w-full h-max col-start-3 col-span-1 p-4 flex flex-col gap-5 transition-all dark:bg-neutral-800`}>
 		{#if !form || !form.url}
 			<h1 class="text-2xl text-center dark:text-white">Short an URL</h1>
-			<input type="url" required name="url" class="w-full ring-0 bg-neutral-400 dark:bg-neutral-700  rounded-md h-11 px-2 text-black dark:text-neutral-50 placeholder:text-gray-700 dark:placeholder:text-neutral-400" placeholder="enter an URL" on:keydown={validate} on:input={validate}/>
-			<button type="button" class="text-red-500 w-max flex gap-2 items-center" on:click={() => dateEnabled = !dateEnabled}>
-				<div class="h-4 w-4">
-					{#if !dateEnabled}
-						<CalendarIcon />
-					{/if}
-					{#if dateEnabled}
-						<CrossIcon />
-					{/if}
-				</div>
-				{
-					dateEnabled ?
-					'Remove expiration' :
-					'Set expiration'
-				}
-				
-			</button>
+			<input type="url" required name="url" class="w-full ring-0 bg-neutral-400 dark:bg-neutral-700  rounded-md h-11 px-2 text-black dark:text-neutral-50 placeholder:text-gray-700 dark:placeholder:text-neutral-400" placeholder="enter an URL" on:keydown={validate} on:input={validate}/>	
+			
+			<div class="flex justify-between">
+				<button type="button" class="text-red-500 w-max flex gap-2 items-center" on:click={() => dateEnabled = !dateEnabled}>
+					<div class="h-4 w-4">
+						{#if !dateEnabled}
+							<CalendarIcon />
+						{/if}
+						{#if dateEnabled}
+							<CrossIcon />
+						{/if}
+					</div>
+					{
+						dateEnabled ?
+						'Remove expiration' :
+						'Set expiration'
+					}
+				</button>
+
+				{#if !data.auth}
+					<a href="/login" class="text-red-500 after:content-['beta'] after:text-xs after:bg-sky-700 after:text-white after:p-0.5 after:px-2 relative grid after:absolute after:rounded-full after:-right-full after:-mt-3 after:inline-block">Login</a>
+				{/if}
+			</div>
+			
 			{#if dateEnabled}
 				<input in:fly={{ y: -30 }} out:fly={{ y: -30 }} name="expiration" placeholder="Expiration" bind:this={date} type="datetime-local" class="w-max p-2 bg-neutral-400 dark:bg-neutral-700 dark:text-neutral-50 placeholder:text-gray-700 dark:placeholder:text-neutral-400 rounded-md" min={new Date().toDateString()} />
 			{/if}

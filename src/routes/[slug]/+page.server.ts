@@ -1,4 +1,4 @@
-import links from "../../lib/pb";
+import links from "../../lib/server/pb";
 import { redirect } from '@sveltejs/kit';
 
 /** @type {import('./$types').PageServerLoad} */

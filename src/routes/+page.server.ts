@@ -1,15 +1,19 @@
 import PocketBase from 'pocketbase';
-import pb from '../lib/pb'
 import openGraph from 'metatag-crawler';
+import type { Actions, Cookies } from '@sveltejs/kit';
+import pocketbaseEs from 'pocketbase';
+import { PB_URL } from '$env/static/private';
 
 
 /** @type {import('./$types').Actions} */
-export const actions = {
-  default: async ({request}: {request: Request}) => {
+export const actions: Actions = {
+  default: async ({request, cookies}: {request: Request, cookies: Cookies}) => {
     const data = await request.formData();
 
     const url = data.get('url');
     const expiration = data.get('expiration');
+    const user = data.get('expiration');
+
 
     let expDate: any;
    
@@ -17,13 +21,18 @@ export const actions = {
 
     if(url) {
       
+      const pb = new pocketbaseEs(PB_URL);
+      pb.authStore.save(cookies.get("SESSION") as string, null)
+
       const record = await pb
-        .create({
-          url,
-          expiration: expDate
+        .collection("links").create({
+            url,
+            expiration: expDate,
+            user: cookies.get("USER_ID")
         });
       await new Promise(async (resolve: any, reject: any) => {
         openGraph(url, async (err: any, data: any) => {
+
 
           if(!data) resolve();
 
@@ -35,7 +44,7 @@ export const actions = {
           };
 
           if(!err)
-            await pb.update(record.id, {
+            await pb.collection("links").update(record.id, {
               url,
               expiration: expDate,
               meta: oldStyleData

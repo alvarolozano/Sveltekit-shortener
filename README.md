@@ -1,10 +1,10 @@
 # Sveltekit-shortener (powered by PocketBase)
 
 I have been using Next.js for almost 1 year. It is my favourite framework, but SvelteKit seems to be a great alternative (also has unique functionalities). This is a personal project with this goals:
-- [ ] Go deeper with Svelte/SvelteKit
-- [ ] Use advanced TailwindCSS
-- [ ] Build an useful tool for my personal use
-- [ ] Develop my first PocketBase backend (I normally build from scratch or use other CMS such as Strapi)
+- Go deeper with Svelte/SvelteKit
+- Use advanced TailwindCSS
+- Build an useful tool for my personal use
+- Develop my first PocketBase backend (I normally build from scratch or use other CMS such as Strapi)
 
 ## Roadmap
 - [x] Allow users to create links:
